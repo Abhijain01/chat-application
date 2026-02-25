@@ -32,7 +32,7 @@ pip install -r requirements.txt
 ### 3. Environment Variables
 Create a `.env` file in the root directory (or ensure the fallback URL matches your database).
 ```ini
-DATABASE_URL=postgresql+asyncpg://postgres:1234@127.0.0.1/chat_db
+DATABASE_URL=postgresql+asyncpg://postgres:password@127.0.0.1/chat_db
 ```
 *(Make sure to update the username/password to match your local PostgreSQL configuration)*
 
