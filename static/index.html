@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI Real-Time Chat</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen glass-panel">
+        <div class="login-card">
+            <div class="logo">
+                <i class="fa-solid fa-bolt lock-icon"></i>
+            </div>
+            <h2>Welcome Back</h2>
+            <p>Enter your username to join the chat</p>
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="username-input" placeholder="Username" required autocomplete="off">
+                </div>
+                <button type="submit" class="primary-btn">
+                    <span>Connect</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Chat Screen -->
+    <div id="chat-screen" class="screen hidden">
+        <div class="chat-container glass-panel">
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <div class="user-profile">
+                        <div class="avatar" id="my-avatar"></div>
+                        <div class="user-info">
+                            <h3 id="current-user-display">User</h3>
+                            <span class="status-indicator online">Online</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="search-contact" placeholder="Search users...">
+                </div>
+
+                <div class="contacts-list">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding-right: 12px;">
+                        <h4 class="section-title">CHATS</h4>
+                        <button id="show-group-modal-btn" class="icon-btn"
+                            style="width: 28px; height: 28px; font-size: 14px;" title="Create Group">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="contacts-container">
+                        <!-- Contacts dynamically added here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group Creation Modal (Hidden) -->
+            <div id="group-modal" class="screen hidden" style="z-index: 100; background: rgba(0,0,0,0.5);">
+                <div class="login-card glass-panel" style="max-width: 350px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="font-size: 20px;">Create Group</h3>
+                        <button id="close-group-modal" class="icon-btn" style="width: 30px; height: 30px;"><i
+                                class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <form id="create-group-form">
+                        <div class="input-group">
+                            <i class="fa-solid fa-users"></i>
+                            <input type="text" id="group-name-input" placeholder="Group Name" required
+                                autocomplete="off">
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-user-plus"></i>
+                            <input type="text" id="group-members-input" placeholder="Usernames (comma separated)"
+                                required autocomplete="off">
+                        </div>
+                        <button type="submit" class="primary-btn" style="padding: 12px;">Create</button>
+                    </form>
+                </div>
+            </div>
+
+
+            <!-- Main Chat Area -->
+            <div class="main-chat">
+                <!-- Header -->
+                <div class="chat-header">
+                    <div class="active-contact hidden" id="active-contact-info">
+                        <div class="avatar active-avatar" id="partner-avatar"></div>
+                        <div class="user-info">
+                            <h3 id="partner-name">Select a contact</h3>
+                            <span class="status-indicator">Select a user to start chatting</span>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button class="icon-btn" id="logout-btn" title="Logout" type="button"><i
+                                class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                    </div>
+                </div>
+
+                <!-- Messages Area -->
+                <div class="messages-container" id="messages-container">
+                    <div class="empty-state" id="empty-state">
+                        <div class="empty-icon"><i class="fa-regular fa-comments"></i></div>
+                        <h3>No messages yet</h3>
+                        <p>Select a contact from the sidebar and say hello!</p>
+                    </div>
+                    <!-- Chat bubbles injected here -->
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-area hidden" id="input-area">
+                    <form id="message-form">
+                        <button type="button" class="icon-btn attachment-btn"><i
+                                class="fa-solid fa-paperclip"></i></button>
+                        <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off">
+                        <button type="submit" class="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
